@@ -13,6 +13,8 @@ class Visitor
 
   property :id,           Serial
   property :ip_address,   String
+  property :longitude,    String
+  property :latitude,     String
   property :created_at,   DateTime
 end
 
