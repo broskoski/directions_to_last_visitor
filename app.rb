@@ -3,7 +3,7 @@ require 'datamapper'
 require 'rack-flash'
 require 'geokit'
 
-enable :sessions
+# enable :sessions
 # use Rack::Flash
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
