@@ -1,11 +1,19 @@
 #content
-	%h2
-		Current Visitor = 
-		=@currentvisitor.ip_address
-	%h2
-		Previous Visitor = 
-		=@previousvisitor.ip_address
-		
-	%h2
-		Location = 
-		=@location
+	-if @currentvisitor != nil
+		%h2
+			="You (#{@currentvisitor.ip_address},"
+			%span#lnglat= "#{@currentvisitor.longitude}, #{@currentvisitor.latitude}"
+			)
+	#map{:style=>"height:400px;width:100%"}
+	-if @previousvisitor != nil
+		%h2= "Previous visitor (#{@previousvisitor.ip_address})"
+		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
+		%span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
+	-else
+		%h2 Error retrieving previous visitor (defaulting to Cancun)
+		%span#prev_lng{:style => "display:none"}="Cancun,Mexico"
+		%span#prev_lat{:style => "display:none"}=""
+
+:javascript
+	var lat = #{@currentvisitor.latitude};
+	var lng = #{@currentvisitor.longitude};

@@ -1,18 +1,43 @@
 $(document).ready(function() {
-	get_location()
+	get_location();
 });
 
+function plot_map(){
+	plng = $('#prev_lng').html();
+	plat = $('#prev_lat').html();
+	
+	var directions = $.get('http://maps.googleapis.com/maps/api/directions/json?sensor=true&origin='+lat+","+lng+"&destination="+plat+","+plng);
+	
+	var latlng = new google.maps.LatLng(lat, lng);
+	var myOptions = {
+		zoom: 16,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	
+	var map = new google.maps.Map(document.getElementById("map"), myOptions);
+	
+	var marker = new google.maps.Marker({
+		position: latlng, 
+		map: map, 
+		title: "You"
+	});
+}
+
 function get_location() {
-  	navigator.geolocation.getCurrentPosition(handle_success, handle_error, {maximumAge: 75000});
+	if (geo_position_js.init()) {
+	  geo_position_js.getCurrentPosition(geo_success, geo_error);
+	}
 }
 
-function handle_success(position){
-	var latitude = position.coords.latitude;
-	var longitude = position.coords.longitude;
-	alert('hello');
-	alert('lat=' + latitude + ' long: '+ longitude);
+function geo_success(position){
+	lat = position.coords.latitude;
+	lng = position.coords.longitude;
+	
+	$("#lnglat").html(lng + ", " + lat);
+	plot_map();
 }
 
-function handle_error(err) {
-  
+function geo_error(err) {
+	plot_map();
 }

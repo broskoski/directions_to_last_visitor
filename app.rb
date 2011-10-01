@@ -15,18 +15,31 @@ class Visitor
   property :ip_address,   String
   property :longitude,    String
   property :latitude,     String
+  property :city,         String
+  property :country,      String
   property :created_at,   DateTime
+
 end
 
 get '/' do
-  @previousvisitor = Visitor.last
-  
+  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'])
+
   @currentvisitor = Visitor.new(
-    :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
+    :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'], 
+    :longitude => @currentlocation.lng,
+    :latitude => @currentlocation.lat,
+    :city => @currentlocation.city,
+    :country => @currentlocation.country
   )
-  @currentvisitor.save
   
-  @location = Geokit::Geocoders::GeoPluginGeocoder.geocode(@currentvisitor.ip_address)
+  @previousvisitor = Visitor.last(:ip_address.not => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'])
+  
+  if @previous_visitor != nil
+    @currentvisitor.save if @current_visitor.ip_address != @previous_visitor.ip_address
+  end
+    
+  @lng = "24.402085"
+  @lat = "-86.17328"
   
   haml :index
 end
