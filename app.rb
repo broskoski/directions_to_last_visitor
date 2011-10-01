@@ -35,7 +35,7 @@ get '/' do
   @previousvisitor = Visitor.last(:ip_address.not => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'])
   
   if @previous_visitor != nil
-    @currentvisitor.save if @current_visitor.ip_address != @previous_visitor.ip_address
+    @currentvisitor.save
   end
     
   @lng = "24.402085"
