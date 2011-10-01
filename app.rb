@@ -22,7 +22,7 @@ class Visitor
 end
 
 get '/' do
-  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'])
+  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(env['REMOTE_ADDR'])
 
   @currentvisitor = Visitor.new(
     :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'], 
@@ -32,7 +32,7 @@ get '/' do
     :country => @currentlocation.country
   )
   
-  @previousvisitor = Visitor.last(:ip_address.not => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'])
+  @previousvisitor = Visitor.last(:ip_address.not => env['REMOTE_ADDR'])
   
   if @previous_visitor != nil
     @currentvisitor.save
