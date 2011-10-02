@@ -51,7 +51,10 @@ function geo_success(position){
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
 	
-	$("#lnglat").html(lng + ", " + lat);
+	$("#lnglat").html(lat + ", " + lng);
+	
+	$.post("update/"+current_id, {lat: lat, lng: lng} );
+	
 	get_directions();
 }
 

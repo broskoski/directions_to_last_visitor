@@ -32,16 +32,23 @@ get '/' do
     :country => @currentlocation.country
   )
   
-  @previousvisitor = Visitor.last(:ip_address.not => env['REMOTE_ADDR'])
+  @previousvisitor = Visitor.last
   
-  if @previous_visitor != nil
-    @currentvisitor.save
-  end
-    
-  @lng = "24.402085"
-  @lat = "-86.17328"
+  @currentvisitor.save
   
   haml :index
+end
+
+post '/update/:id' do
+  current = Visitor.get(params[:id])
+  current.longitude = params[:lng]
+  current.latitude = params[:lat]
+  
+  if current.save
+    status 201
+  else
+    status 412 
+  end
 end
 
 DataMapper.auto_upgrade!
