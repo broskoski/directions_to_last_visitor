@@ -22,8 +22,11 @@ class Visitor
 end
 
 get '/' do
-  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(env['REMOTE_ADDR'])
-
+  ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
+  puts ip
+  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(ip)
+  puts @currentlocation
+  puts "lng: #{@currentlocation.lng}"
   @currentvisitor = Visitor.new(
     :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'], 
     :longitude => @currentlocation.lng,
