@@ -33,6 +33,7 @@ function get_directions(){
 	};
 
 	directionsService.route(request, function(response, status) {
+		alert(status);
 		directionsDisplay.setDirections(response);
 		// if (status == google.maps.DirectionsStatus.OK) {
 		// 		
