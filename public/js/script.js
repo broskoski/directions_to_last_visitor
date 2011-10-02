@@ -2,25 +2,39 @@ $(document).ready(function() {
 	get_location();
 });
 
-function plot_map(){
+function get_directions(){
 	plng = $('#prev_lng').html();
 	plat = $('#prev_lat').html();
 	
-	var directions = $.get('http://maps.googleapis.com/maps/api/directions/json?sensor=true&origin='+lat+","+lng+"&destination="+plat+","+plng);
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
 	
-	var latlng = new google.maps.LatLng(lat, lng);
 	var myOptions = {
-		zoom: 16,
-		center: latlng,
+		zoom:7,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	
+	}
+
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 	
-	var marker = new google.maps.Marker({
-		position: latlng, 
-		map: map, 
-		title: "You"
+	directionsDisplay.setMap(map);
+	
+	origin = new google.maps.LatLng(lat, lng);
+	if(plng !== "Cancun,Mexico"){
+		destination = new google.maps.LatLng(plat, plng);
+	}else{
+		destination = plng;
+	}
+	
+	var request = {
+		origin: origin, 
+		destination: destination,
+		travelMode: google.maps.DirectionsTravelMode.DRIVING
+	};
+
+	directionsService.route(request, function(response, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsDisplay.setDirections(response);
+		}
 	});
 }
 
@@ -35,9 +49,9 @@ function geo_success(position){
 	lng = position.coords.longitude;
 	
 	$("#lnglat").html(lng + ", " + lat);
-	plot_map();
+	get_directions();
 }
 
 function geo_error(err) {
-	plot_map();
+	get_directions();
 }
