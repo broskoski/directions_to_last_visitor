@@ -14,9 +14,10 @@ function get_directions(){
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
 
-	var map = new google.maps.Map(document.getElementById("map"), myOptions);
+	// var map = new google.maps.Map(document.getElementById("map"), myOptions);
 	
-	directionsDisplay.setMap(map);
+	// directionsDisplay.setMap(map);
+	directionsDisplay.setPanel(document.getElementById("directions"));
 	
 	origin = new google.maps.LatLng(lat, lng);
 	if(plng !== "Cancun,Mexico"){
@@ -34,6 +35,8 @@ function get_directions(){
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(response);
+		}else{
+			alert("error")
 		}
 	});
 }

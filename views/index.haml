@@ -4,7 +4,9 @@
 			="You (#{@currentvisitor.ip_address},"
 			%span#lnglat= "#{@currentvisitor.longitude}, #{@currentvisitor.latitude}"
 			)
-	#map{:style=>"height:400px;width:100%"}
+	.clearfix
+		-# #map{:style=>"float:right;height:400px;width:49%"}
+		#directions{:style=>"width:100%;text-align:left"}
 	-if @previousvisitor != nil
 		%h2= "Previous visitor (#{@previousvisitor.ip_address})"
 		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
