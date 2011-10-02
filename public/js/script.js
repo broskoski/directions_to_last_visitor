@@ -36,7 +36,7 @@ function get_directions(){
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(response);
 		}else{
-			alert("error")
+			$('#directions').html("No directions found between these two locations");
 		}
 	});
 }
@@ -53,7 +53,6 @@ function geo_success(position){
 	
 	$("#lnglat").html(lat + ", " + lng);
 	
-	alert('here');
 	$.post("update/"+current_id, {lat: lat, lng: lng} );
 	
 	get_directions();
