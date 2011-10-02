@@ -33,11 +33,12 @@ function get_directions(){
 	};
 
 	directionsService.route(request, function(response, status) {
-		if (status == google.maps.DirectionsStatus.OK) {
-			directionsDisplay.setDirections(response);
-		}else{
-			$('#directions').html("No directions found between these two locations");
-		}
+		directionsDisplay.setDirections(response);
+		// if (status == google.maps.DirectionsStatus.OK) {
+		// 		
+		// 	}else{
+		// 		$('#directions').html("No directions found between these two locations");
+		// 	}
 	});
 }
 
