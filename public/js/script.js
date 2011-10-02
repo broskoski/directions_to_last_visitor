@@ -53,6 +53,7 @@ function geo_success(position){
 	
 	$("#lnglat").html(lat + ", " + lng);
 	
+	alert('here');
 	$.post("update/"+current_id, {lat: lat, lng: lng} );
 	
 	get_directions();
