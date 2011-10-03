@@ -29,17 +29,15 @@ function get_directions(){
 	var request = {
 		origin: origin, 
 		destination: destination,
-		travelMode: google.maps.DirectionsTravelMode.DRIVING
+		travelMode: google.maps.DirectionsTravelMode.WALKING
 	};
 
 	directionsService.route(request, function(response, status) {
-		alert(status);
-		directionsDisplay.setDirections(response);
-		// if (status == google.maps.DirectionsStatus.OK) {
-		// 		
-		// 	}else{
-		// 		$('#directions').html("No directions found between these two locations");
-		// 	}
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsDisplay.setDirections(response);
+		}else{
+			$('#directions').html("No directions found between these two locations");
+		}
 	});
 }
 
