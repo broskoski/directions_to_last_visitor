@@ -29,7 +29,7 @@ function get_directions(){
 	var request = {
 		origin: origin, 
 		destination: destination,
-		travelMode: google.maps.DirectionsTravelMode.WALKING
+		travelMode: google.maps.DirectionsTravelMode.DRIVING
 	};
 
 	directionsService.route(request, function(response, status) {
