@@ -1,4 +1,5 @@
-## &#x25EC;
+&#x25EC;
+=======
 
 Structure derived from 'Sinatra-DataMapper-Template'
 
