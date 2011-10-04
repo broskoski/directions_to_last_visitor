@@ -2,7 +2,7 @@ $(document).ready(function() {
 	get_location();
 });
 
-function get_directions(){
+function get_directions(lat, lng){
 	plng = $('#prev_lng').html();
 	plat = $('#prev_lat').html();
 	
@@ -13,17 +13,15 @@ function get_directions(){
 		zoom:7,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
-
-	// var map = new google.maps.Map(document.getElementById("map"), myOptions);
-	
+		
 	// directionsDisplay.setMap(map);
 	directionsDisplay.setPanel(document.getElementById("directions"));
 	
-	origin = new google.maps.LatLng(lat, lng);
+	var origin = new google.maps.LatLng(lat, lng);
 	if(plng !== "Cancun,Mexico"){
-		destination = new google.maps.LatLng(plat, plng);
+		var destination = new google.maps.LatLng(plat, plng);
 	}else{
-		destination = plng;
+		var destination = plng;
 	}
 	
 	var request = {
@@ -36,7 +34,19 @@ function get_directions(){
 		if (status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(response);
 		}else{
-			$('#directions').html("No directions found between these two locations");
+			$("#map").css('height', '400px');
+			var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+			var marker_a = new google.maps.Marker({
+				position: origin,
+				map: map,
+				title:"A"
+			});
+			var marker_b = new google.maps.Marker({
+				position: destination,
+				map: map,
+				title:"b"
+			});    
 		}
 	});
 }
@@ -48,16 +58,16 @@ function get_location() {
 }
 
 function geo_success(position){
-	lat = position.coords.latitude;
-	lng = position.coords.longitude;
+	geolat = position.coords.latitude;
+	geolng = position.coords.longitude;
 	
-	$("#lnglat").html(lat + ", " + lng);
+	$("#lnglat").html(geolat + ", " + geolng);
 	
-	$.post("update/"+current_id, {lat: lat, lng: lng} );
+	$.post("update/"+current_id, {lat: geolat, lng: geolng} );
 	
-	get_directions();
+	get_directions(geolat, geolng);
 }
 
 function geo_error(err) {
-	get_directions();
+	$('#content').html('');
 }

@@ -5,7 +5,7 @@
 			%span#lnglat= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"
 			)
 	.clearfix
-		-# #map{:style=>"float:right;height:400px;width:49%"}
+		#map{:style=>"float:right;width:100%"}
 		#directions{:style=>"width:100%;text-align:left"}
 	-if @previousvisitor != nil
 		%h2

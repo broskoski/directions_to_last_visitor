@@ -47,11 +47,13 @@ post '/update/:id' do
   current.longitude = params[:lng]
   current.latitude = params[:lat]
   
+
   if current.save
     status 201
   else
     status 412 
   end
+
 end
 
 DataMapper.auto_upgrade!
