@@ -1,17 +1,13 @@
 #content
 	-if @currentvisitor != nil
-		%h2
-			="You (#{@currentvisitor.ip_address},"
-			%span#lnglat= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"
-			)
+		%h2="You (#{@currentvisitor.ip_address})"
+		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"
 	.clearfix
-		#map{:style=>"float:right;width:100%"}
+		#map{:style=>"width:100%"}
 		#directions{:style=>"width:100%;text-align:left"}
 	-if @previousvisitor != nil
-		%h2
-			="Previous visitor (#{@previousvisitor.ip_address}"
-			%span#prev_lnglat= "#{@previousvisitor.latitude}, #{@previousvisitor.longitude}"
-			)
+		%h2="Previous visitor (#{@previousvisitor.ip_address})"
+		%h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}, #{@previousvisitor.longitude}"
 		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
 		%span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
 	-else

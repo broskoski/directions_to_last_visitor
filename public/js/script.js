@@ -18,6 +18,7 @@ function get_directions(lat, lng){
 	directionsDisplay.setPanel(document.getElementById("directions"));
 	
 	var origin = new google.maps.LatLng(lat, lng);
+	
 	if(plng !== "Cancun,Mexico"){
 		var destination = new google.maps.LatLng(plat, plng);
 	}else{
