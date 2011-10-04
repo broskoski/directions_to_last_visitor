@@ -41,12 +41,12 @@ function get_directions(lat, lng){
 			var marker_a = new google.maps.Marker({
 				position: origin,
 				map: map,
-				title:"A"
+				title:"You"
 			});
 			var marker_b = new google.maps.Marker({
 				position: destination,
 				map: map,
-				title:"b"
+				title:"Previous Visitor"
 			});    
 		}
 	});
