@@ -15,8 +15,6 @@ class Visitor
   property :ip_address,   String
   property :longitude,    String
   property :latitude,     String
-  property :city,         String
-  property :country,      String
   property :created_at,   DateTime
 
 end
@@ -30,9 +28,7 @@ get '/' do
   @currentvisitor = Visitor.new(
     :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'], 
     :longitude => @currentlocation.lng,
-    :latitude => @currentlocation.lat,
-    :city => @currentlocation.city,
-    :country => @currentlocation.country
+    :latitude => @currentlocation.lat
   )
   
   @previousvisitor = Visitor.last
@@ -47,7 +43,6 @@ post '/update/:id' do
   current.longitude = params[:lng]
   current.latitude = params[:lat]
   
-
   if current.save
     status 201
   else
