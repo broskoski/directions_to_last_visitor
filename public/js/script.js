@@ -10,11 +10,12 @@ function get_directions(lat, lng){
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	
 	var myOptions = {
-		zoom:7,
+		zoom:8,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
+	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 		
-	// directionsDisplay.setMap(map);
+	directionsDisplay.setMap(map);
 	directionsDisplay.setPanel(document.getElementById("directions"));
 	
 	var origin = new google.maps.LatLng(lat, lng);
@@ -33,21 +34,13 @@ function get_directions(lat, lng){
 
 	directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
+			$('#content').show();
+			$('#map').css('height', '400px').css('margin-bottom', '40px')
 			directionsDisplay.setDirections(response);
 		}else{
-			$("#map").css('height', '400px');
-			var map = new google.maps.Map(document.getElementById("map"), myOptions);
+			$('#content').show();
+			$('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
 
-			var marker_a = new google.maps.Marker({
-				position: origin,
-				map: map,
-				title:"You"
-			});
-			var marker_b = new google.maps.Marker({
-				position: destination,
-				map: map,
-				title:"Previous Visitor"
-			});    
 		}
 	});
 }

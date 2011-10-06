@@ -1,9 +1,12 @@
-#content
+#content{:style => 'display:none'}
+	%h1#title Directions to Last Visitor
+	#map{:style=>"width:100%"}
+
 	-if @currentvisitor != nil
 		%h2="You (#{@currentvisitor.ip_address})"
 		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"
 	.clearfix
-		#map{:style=>"width:100%"}
+		
 		#directions{:style=>"width:100%;text-align:left"}
 	-if @previousvisitor != nil
 		%h2="Previous visitor (#{@previousvisitor.ip_address})"

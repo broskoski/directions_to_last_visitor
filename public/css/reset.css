@@ -243,7 +243,7 @@ a:hover {
 p { padding:0.5em 0; margin:0; }
 span { opacity:0.5; }
 input { font-weight:bold; }
-h1,h2 { text-align:center; }
+h1,h2 { text-align:center; line-height:40px;}
 
 /* Structure */
 div#about { position:fixed; top:1em; right:1em; }
