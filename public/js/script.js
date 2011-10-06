@@ -64,5 +64,6 @@ function geo_success(position){
 }
 
 function geo_error(err) {
-	$('#content').html('');
+	$('#content').show();
+	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
 }
