@@ -131,6 +131,8 @@ function try_international_directions(origin, destination){
 										}
 									});
 								}
+							}else{
+								show_direction_error();
 							}
 						});
 						$('#content').show();
@@ -144,21 +146,6 @@ function try_international_directions(origin, destination){
 				}
 		} else {
 			show_direction_error()
-		}
-	});
-}
-
-function get_address(location){
-	geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'latLng': location}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK) {
-			if (results[1]) {
-				console.log(results[1].formatted_address)
-				originairport = results[1].formatted_address
-			}
-		} else {
-			show_direction_error()
-			alert("Geocoder failed due to: " + status);
 		}
 	});
 }
