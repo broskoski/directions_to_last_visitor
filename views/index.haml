@@ -4,9 +4,7 @@
 
 	-if @currentvisitor != nil
 		%h2="You (#{@currentvisitor.ip_address})"
-		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"
-	.clearfix
-		
+		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"	
 		#directions{:style=>"width:100%;text-align:left"}
 	-if @previousvisitor != nil
 		%h2="Previous visitor (#{@previousvisitor.ip_address})"
@@ -21,6 +19,11 @@
 :javascript
 	var lat = #{@currentvisitor.latitude};
 	var lng = #{@currentvisitor.longitude};
+
+	var plat = #{@previousvisitor.latitude};
+	var plng = #{@previousvisitor.longitude};
+
+	var originairport, destinationairport;
 	
 	var current_id = #{@currentvisitor.id}
 
