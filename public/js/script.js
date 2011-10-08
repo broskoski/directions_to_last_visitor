@@ -55,6 +55,7 @@ function get_directions(lat, lng){
 	};
 
 	directionsService.route(request, function(response, status) {
+		alert(status)
 		if (status == google.maps.DirectionsStatus.OK) {
 			$('#content').show();
 			$('#map').css('height', '400px').css('margin-bottom', '40px');
