@@ -26,8 +26,9 @@ function geo_success(position){
 }
 
 function geo_error(err) {
-	$('#content').show();
-	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
+	get_directions(lat,lng);
+// 	$('#content').show();
+// 	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
 }
 function get_directions(lat, lng){
 	plng = $('#prev_lng').html();
@@ -157,7 +158,6 @@ function try_international_directions(origin, destination){
 }
 
 function show_direction_error(){
-	get_directions();
-	// $('#content').show();
-	// $('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
+	$('#content').show();
+	$('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
 }
