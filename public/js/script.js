@@ -20,9 +20,8 @@ function geo_success(position){
 }
 
 function geo_error(err) {
-	// $('#content').show();
-	// $('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
-	get_directions(lat,lng);
+	$('#content').show();
+	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
 }
 function get_directions(lat, lng){
 	plng = $('#prev_lng').html();
@@ -55,14 +54,13 @@ function get_directions(lat, lng){
 	};
 
 	directionsService.route(request, function(response, status) {
-		alert(status)
 		if (status == google.maps.DirectionsStatus.OK) {
 			$('#content').show();
 			$('#map').css('height', '400px').css('margin-bottom', '40px');
 			google.maps.event.trigger(map, "resize");
 			directionsDisplay.setDirections(response);
 		}else{
-			//try_international_directions(origin, destination);
+			try_international_directions(origin, destination);
 		}
 	});
 }
