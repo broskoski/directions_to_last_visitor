@@ -26,9 +26,8 @@ function geo_success(position){
 }
 
 function geo_error(err) {
-	get_directions(lat,lng);
-// 	$('#content').show();
-// 	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
+	$('#content').show();
+	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
 }
 function get_directions(lat, lng){
 	plng = $('#prev_lng').html();
