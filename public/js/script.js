@@ -20,8 +20,9 @@ function geo_success(position){
 }
 
 function geo_error(err) {
-	$('#content').show();
-	$('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
+	// $('#content').show();
+	// $('#content').html('<h1>Your device must provide your location<br>for this piece to function.</h1>');
+	get_directions(lat,lng);
 }
 function get_directions(lat, lng){
 	plng = $('#prev_lng').html();
@@ -60,7 +61,7 @@ function get_directions(lat, lng){
 			google.maps.event.trigger(map, "resize");
 			directionsDisplay.setDirections(response);
 		}else{
-			try_international_directions(origin, destination);
+			//try_international_directions(origin, destination);
 		}
 	});
 }
