@@ -3,9 +3,15 @@ $(document).ready(function() {
 });
 
 function get_location() {
-	if (geo_position_js.init()) {
-	  geo_position_js.getCurrentPosition(geo_success, geo_error);
-	}
+	// if (geo_position_js.init()) {
+	//   geo_position_js.getCurrentPosition(geo_success, geo_error);
+	// }
+
+	if (Modernizr.geolocation) {
+    	navigator.geolocation.getCurrentPosition(geo_success, geo_error);
+  	} else {
+    	geo_error();
+  	}
 }
 
 function geo_success(position){
@@ -151,6 +157,7 @@ function try_international_directions(origin, destination){
 }
 
 function show_direction_error(){
-	$('#content').show();
-	$('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
+	get_directions();
+	// $('#content').show();
+	// $('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
 }
