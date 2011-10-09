@@ -101,9 +101,9 @@ function try_international_directions(origin, destination){
 	var geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'latLng': origin}, function(resultsGeoOrigin, statusGeoOrigin) {
 		if (statusGeoOrigin == google.maps.GeocoderStatus.OK) {
-			if (resultsGeoOrigin[3]) {
+			if (resultsGeoOrigin[5]) {
 
-				originairport = resultsGeoOrigin[3].formatted_address;
+				originairport = resultsGeoOrigin[5].formatted_address;
 
 				var requestOrigin = {
 					origin: origin, 
@@ -117,9 +117,9 @@ function try_international_directions(origin, destination){
 						geocoder.geocode({'latLng': destination}, function(resultsGeoDestination, statusGeoDestination) {
 							
 							if (statusGeoDestination == google.maps.GeocoderStatus.OK) {
-								if (resultsGeoDestination[3]) {
+								if (resultsGeoDestination[5]) {
 
-									destinationairport = resultsGeoDestination[3].formatted_address;
+									destinationairport = resultsGeoDestination[5].formatted_address;
 
 									var requestDestination = {
 										origin: 'airport near ' + destinationairport, 
