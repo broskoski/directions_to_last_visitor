@@ -1,14 +1,11 @@
 require 'sinatra'
 require 'datamapper'
-require 'rack-flash'
 require 'geokit'
-
-# enable :sessions
-# use Rack::Flash
+require 'time-lord'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
-class Visitor
+class Visitor 
   include DataMapper::Resource  
 
   property :id,           Serial
@@ -20,6 +17,7 @@ class Visitor
 end
 
 get '/' do
+
   ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
   puts ip
   @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(ip)
@@ -32,7 +30,7 @@ get '/' do
   )
   
   @previousvisitor = Visitor.last
-  
+
   @currentvisitor.save
   
   haml :index

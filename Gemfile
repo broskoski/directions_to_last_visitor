@@ -6,6 +6,7 @@ gem 'datamapper'
 gem 'rack-flash'
 gem 'haml'
 gem 'geokit'
+gem 'time-lord'
 
 group :development do
   gem 'sqlite3-ruby'

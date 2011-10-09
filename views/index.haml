@@ -8,8 +8,8 @@
 		#directions{:style=>"width:100%"}
 	-if @previousvisitor != nil
 		%h2="Previous visitor (#{@previousvisitor.ip_address})"
-		%h4{:style=> "text-align:center"}="#{@previousvisitor.created_at}"
 		%h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}, #{@previousvisitor.longitude}"
+		%h4{:style=> "text-align:center"}="#{Time.parse(@previousvisitor.created_at.to_s).ago_in_words}"
 		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
 		%span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
 	-else
