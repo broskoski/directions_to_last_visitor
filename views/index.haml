@@ -5,6 +5,7 @@
 	-if @currentvisitor != nil
 		%h2="You (#{@currentvisitor.ip_address})"
 		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"	
+		%h4{:style=> "text-align:center"}="Just now"
 		#directions{:style=>"width:100%"}
 	-if @previousvisitor != nil
 		%h2="Previous visitor (#{@previousvisitor.ip_address})"
