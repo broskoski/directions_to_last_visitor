@@ -3,15 +3,9 @@ $(document).ready(function() {
 });
 
 function get_location() {
-	// if (geo_position_js.init()) {
-	//   geo_position_js.getCurrentPosition(geo_success, geo_error);
-	// }
-
-	if (Modernizr.geolocation) {
-    	navigator.geolocation.getCurrentPosition(geo_success, geo_error);
-  	} else {
-    	geo_error();
-  	}
+	if (geo_position_js.init()) {
+	  geo_position_js.getCurrentPosition(geo_success, geo_error, {enableHighAccuracy: true});
+	}
 }
 
 function geo_success(position){
