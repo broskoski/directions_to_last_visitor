@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 function get_location() {
 	if (geo_position_js.init()) {
-	  geo_position_js.getCurrentPosition(geo_success, geo_error, {enableHighAccuracy: true});
+	  geo_position_js.getCurrentPosition(geo_success, geo_error, {enableHighAccuracy: true, maximumAge: 85000});
 	}
 }
 
