@@ -38,6 +38,17 @@ get '/' do
   haml :index
 end
 
+get '/observe' do
+
+  @currentvisitor = Visitor.last
+  
+  @previousvisitor = Visitor[-2]
+
+  @previoustime = Time.parse(@previousvisitor.created_at.to_s).ago_in_words.capitalize
+  
+  haml :index
+end
+
 post '/update/:id' do
   current = Visitor.get(params[:id])
   current.longitude = params[:lng]
