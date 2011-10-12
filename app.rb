@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'datamapper'
 require 'geokit'
+require 'haml'
 require 'time-lord'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")

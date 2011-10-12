@@ -1,0 +1,33 @@
+#content{:style => 'display:none'}
+	%h1#title Directions to Last Visitor
+	#map{:style=>"width:800px"}
+
+	-if @currentvisitor != nil
+		%h2="You (#{@currentvisitor.ip_address})"
+		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"	
+		/ %h4{:style=> "text-align:center"}="Just now"
+		#directions{:style=>"width:100%"}
+	-if @previousvisitor != nil
+		%h2="Previous visitor (#{@previousvisitor.ip_address})"
+		%h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}, #{@previousvisitor.longitude}"
+		/ %h4{:style=> "text-align:center"}=@previoustime
+		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
+		%span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
+	-else
+		%h2 Error retrieving previous visitor (defaulting to Cancun)
+		%span#prev_lng{:style => "display:none"}="Cancun,Mexico"
+		%span#prev_lat{:style => "display:none"}=""
+
+:javascript
+	var lat = #{@currentvisitor.latitude};
+	var lng = #{@currentvisitor.longitude};
+
+	var plat = #{@previousvisitor.latitude};
+	var plng = #{@previousvisitor.longitude};
+	
+	var current_id = #{@currentvisitor.id};
+
+	$(document).ready(function() {
+		get_directions(lat, lng);
+	});
+
