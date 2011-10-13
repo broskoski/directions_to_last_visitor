@@ -97,7 +97,7 @@ function try_international_directions(origin, destination){
 
 				var requestOrigin = {
 					origin: origin, 
-					destination: 'airport near ' + originairport,
+					destination: 'airport near ' + origin,
 					travelMode: google.maps.DirectionsTravelMode.DRIVING
 				};
 
@@ -112,7 +112,7 @@ function try_international_directions(origin, destination){
 									destinationairport = resultsGeoDestination[5].formatted_address;
 
 									var requestDestination = {
-										origin: 'airport near ' + destinationairport, 
+										origin: 'airport near ' + destination, 
 										destination: destination,
 										travelMode: google.maps.DirectionsTravelMode.DRIVING
 									};
