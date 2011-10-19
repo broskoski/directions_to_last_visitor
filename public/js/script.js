@@ -148,5 +148,5 @@ function try_international_directions(origin, destination){
 
 function show_direction_error(){
 	$('#content').show();
-	$('#content').html('<h1>Directions could not be found between '+lat+','+lng+' and '+plat+', '+plng+'</h1>');
+	$('#content').html('<h1>Directions could not be found between you and '+pip+'. Try again later.</h1>');
 }
