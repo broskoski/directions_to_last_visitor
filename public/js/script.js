@@ -10,7 +10,7 @@ function geo_success(position){
 	geolat = position.coords.latitude;
 	geolng = position.coords.longitude;
 	
-	$("#lnglat").html(geolat + ", " + geolng);
+	$("#lnglat").html(geolat + "°, " + geolng + "°");
 	
 	$.post("update/"+current_id, {lat: geolat, lng: geolng} );
 	
