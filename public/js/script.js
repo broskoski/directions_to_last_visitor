@@ -119,8 +119,10 @@ function try_international_directions(origin, destination){
 				origin_address = resultsGeoOrigin[0].formatted_address;
 				origin_city = resultsGeoOrigin[4].formatted_address;
 				$("#you").addClass('click').before("<h2> No directions between </h2>");
+				$('<img src="http://maps.gstatic.com/mapfiles/marker_greenA.png">').prependTo('#you');
 				$("#lnglat").after("<h2> and </h2>");
 				$('#last').addClass('click');
+				$('<img src="http://maps.gstatic.com/mapfiles/marker_greenB.png">').prependTo('#last');
 				$("#prev_lnglat").html("<h4> "+origin_address+" </h4>");
 				$("#prev_lnglat").after('<h4 style="text-align:center">(<a href="http://www.anrdoezrs.net/click-5512762-10594992" style="text-decoration:underline">Find flights to '+origin_city+'</a>)</h4>')
 			}
