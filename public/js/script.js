@@ -106,6 +106,62 @@ function try_international_directions(origin, destination){
   	});  
 
 	google.maps.event.trigger(map, "resize");
+
+	$("<div id='directions2'></div>").insertAfter('#directions');
+
+	var directionsServiceOrigin = new google.maps.DirectionsService();
+	var directionsDisplayOrigin = new google.maps.DirectionsRenderer();
+	var directionsServiceDestination = new google.maps.DirectionsService();
+	var directionsDisplayDestination = new google.maps.DirectionsRenderer();
+
+	directionsDisplayOrigin.setPanel(document.getElementById("directions"));
+	directionsDisplayDestination.setPanel(document.getElementById("directions2"));
+
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'latLng': origin}, function(resultsGeoOrigin, statusGeoOrigin) {
+		if (statusGeoOrigin == google.maps.GeocoderStatus.OK) {
+			if (resultsGeoOrigin[5]) {
+
+				originairport = resultsGeoOrigin[5].formatted_address;
+
+				var requestOrigin = {
+					origin: origin, 
+					destination: 'airport near ' + originairport,
+					travelMode: google.maps.DirectionsTravelMode.DRIVING
+				};
+
+				directionsServiceOrigin.route(requestOrigin, function(responseOrigin, statusOrigin) {
+					
+					if (statusOrigin == google.maps.DirectionsStatus.OK) {
+						geocoder.geocode({'latLng': destination}, function(resultsGeoDestination, statusGeoDestination) {
+							
+							if (statusGeoDestination == google.maps.GeocoderStatus.OK) {
+								if (resultsGeoDestination[5]) {
+
+									destinationairport = resultsGeoDestination[5].formatted_address;
+
+									var requestDestination = {
+										origin: 'airport near ' + destinationairport, 
+										destination: destination,
+										travelMode: google.maps.DirectionsTravelMode.DRIVING
+									};
+
+									directionsServiceOrigin.route(requestDestination, function(responseDestination, statusDestination) {
+										if (statusOrigin == google.maps.DirectionsStatus.OK) {
+											directionsDisplayDestination.setDirections(responseDestination);
+										}
+									});
+								}
+							}
+						});
+						directionsDisplayOrigin.setDirections(responseOrigin);
+					}
+				});
+				}
+		} else {
+			show_direction_error()
+		}
+	});
 }
 /** Converts numeric degrees to radians */
 function toRad(int){
