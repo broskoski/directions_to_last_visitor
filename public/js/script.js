@@ -86,22 +86,27 @@ function try_international_directions(origin, destination){
   	
   	var flightPath = new google.maps.Polyline({
     	path: flightPlanCoordinates,
-    	strokeColor: "#00FFFF",
-    	strokeOpacity: 1.0,
-    	strokeWeight: 3
+    	strokeColor: "#770077",
+    	strokeOpacity: 0.4,
+    	strokeWeight: 7
     });
 
     flightPath.setMap(map);
+    
+    var a_icon = 'http://maps.gstatic.com/mapfiles/marker_greenA.png';
+    var b_icon = 'http://maps.gstatic.com/mapfiles/marker_greenB.png';
 
     var originmarker = new google.maps.Marker({
       position: origin, 
-      map: map, 
+      map: map,
+      icon: a_icon,
       title:"You"
   	}); 
   	
   	var destinationmarker = new google.maps.Marker({
       position: destination, 
       map: map, 
+      icon: b_icon,
       title:"Previous Visitor"
   	});  
 
