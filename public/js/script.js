@@ -117,10 +117,12 @@ function try_international_directions(origin, destination){
 		if (statusGeoOrigin == google.maps.GeocoderStatus.OK) {
 			if (resultsGeoOrigin[0]) {
 				origin_address = resultsGeoOrigin[0].formatted_address;
-				$("#you").addClass('click').before("<h2> No driving directions between </h2>");
+				origin_city = resultsGeoOrigin[4].formatted_address;
+				$("#you").addClass('click').before("<h2> No directions between </h2>");
 				$("#lnglat").after("<h2> and </h2>");
 				$('#last').addClass('click');
 				$("#prev_lnglat").html("<h4> "+origin_address+" </h4>");
+				$("#prev_lnglat").after('<h4 style="text-align:center">(<a href="http://www.anrdoezrs.net/click-5512762-10594992" style="text-decoration:underline">Find flights to '+origin_city+'</a>)</h4>')
 			}
 		}
 	});
