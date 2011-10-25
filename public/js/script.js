@@ -102,14 +102,6 @@ function try_international_directions(origin, destination){
       icon: a_icon,
       title:"You"
   	}); 
-
-  	var originwindow = new google.maps.InfoWindow({
-    	content: "You"
-	});
-
-	google.maps.event.addListener(originmarker, 'click', function() {
-  		originwindow.open(map,originmarker);
-	});
   	
   	var destinationmarker = new google.maps.Marker({
       position: destination, 
@@ -117,14 +109,6 @@ function try_international_directions(origin, destination){
       icon: b_icon,
       title:"Previous Visitor"
   	});  
-
-  	var destinationwindow = new google.maps.InfoWindow({
-    	content: "Previous Visitor"
-	});
-
-	google.maps.event.addListener(destinationmarker, 'click', function() {
-  		destinationwindow.open(map,destinationmarker);
-	});
 
 	google.maps.event.trigger(map, "resize");
 }
