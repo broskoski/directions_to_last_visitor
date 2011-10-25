@@ -64,10 +64,13 @@ function get_directions(lat, lng){
 //disgusting, i know.
 function try_international_directions(lat, lng){
 	
+	var lat_midpoint = get_midpoint(lat, plat);
+	var lng_midpoint = get_midpoint(lng, plng);
+
 	var myOptions = {
 		zoom:3,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		center: new google.maps.LatLng(lat, lng)
+		center: new google.maps.LatLng(lat_midpoint, lng_midpoint)
 	}
 
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -90,7 +93,9 @@ function try_international_directions(lat, lng){
     $('#map').css('height', '400px').css('margin-bottom', '40px');
 	google.maps.event.trigger(map, "resize");
 }
-
+function get_midpoint(x, y){
+	return ((x+y) / 2);
+}
 function show_direction_error(){
 	$('#content').show();
 	$('#content').html('<h1>Directions could not be found between you and '+pip+'. Try again later.</h1>');
