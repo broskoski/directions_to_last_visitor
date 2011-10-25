@@ -82,24 +82,12 @@ function try_international_directions(lat, lng){
     	strokeOpacity: 1.0,
     	strokeWeight: 2
     });
+    
+    flightPath.setMap(map);
 
     $('#content').show();
     $('#map').css('height', '400px').css('margin-bottom', '40px');
 	google.maps.event.trigger(map, "resize");
-	
-	// var originmarker = new google.maps.Marker({
-	// 	position: origin, 
-	// 	map: map, 
- //      	title:"You"
- //    });
-
- //    var destinationmarker = new google.maps.Marker({
-	// 	position: destination, 
-	// 	map: map, 
- //      	title:"Previous Visitor"
- //    });
-
-    flightPath.setMap(map);
 }
 
 function show_direction_error(){
