@@ -67,6 +67,8 @@ function try_international_directions(lat, lng){
 	var lat_midpoint = get_midpoint(lat, plat);
 	var lng_midpoint = get_midpoint(lng, plng);
 
+	console.log("latmidpoint:" +lat_midpoint);
+
 	var myOptions = {
 		zoom:3,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -94,7 +96,7 @@ function try_international_directions(lat, lng){
 	google.maps.event.trigger(map, "resize");
 }
 function get_midpoint(x, y){
-	return ((x+y) / 2);
+	return ((parseInt(x)+parseInt(y)) / 2);
 }
 function show_direction_error(){
 	$('#content').show();
