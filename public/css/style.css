@@ -1,2 +1,7 @@
 @import url(reset.css);
 .adp-legal{display:none;}
+.click{
+	text-decoration:underline;
+	color:#00f;
+	cursor:pointer;
+}

@@ -3,12 +3,12 @@
 	#map{:style=>"width:800px"}
 
 	-if @currentvisitor != nil
-		%h2="You (#{@currentvisitor.ip_address})"
+		%h2#you="You (#{@currentvisitor.ip_address})"
 		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}, #{@currentvisitor.longitude}"	
 		/ %h4{:style=> "text-align:center"}="Just now"
 		#directions{:style=>"width:100%"}
 	-if @previousvisitor != nil
-		%h2="Previous visitor (#{@previousvisitor.ip_address})"
+		%h2#last="Previous visitor (#{@previousvisitor.ip_address})"
 		%h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}, #{@previousvisitor.longitude}"
 		/ %h4{:style=> "text-align:center"}=@previoustime
 		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"

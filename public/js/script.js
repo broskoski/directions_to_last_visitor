@@ -1,3 +1,5 @@
+var originmarker, destinationmarker, map, origin, destination;
+
 function get_location() {
 	if (geo_position_js.init()) {
 	  geo_position_js.getCurrentPosition(geo_success, geo_error, {enableHighAccuracy: true, maximumAge: 85000});
@@ -35,12 +37,12 @@ function get_directions(lat, lng){
 	directionsDisplay.setMap(map);
 	directionsDisplay.setPanel(document.getElementById("directions"));
 	
-	var origin = new google.maps.LatLng(lat, lng);
+	origin = new google.maps.LatLng(lat, lng);
 	
 	if(plng !== "Cancun,Mexico"){
-		var destination = new google.maps.LatLng(plat, plng);
+		destination = new google.maps.LatLng(plat, plng);
 	}else{
-		var destination = plng;
+		destination = plng;
 	}
 	
 	var request = {
@@ -61,7 +63,6 @@ function get_directions(lat, lng){
 	});
 }
 
-//disgusting, i know.
 function try_international_directions(origin, destination){
 	var bounds = new google.maps.LatLngBounds();
 
@@ -75,8 +76,8 @@ function try_international_directions(origin, destination){
 	};
 
 	$('#content').show();
-    $('#map').css('height', '350px').css('margin-bottom', '40px');
-	var map = new google.maps.Map(document.getElementById("map"), myOptions);
+    $('#map').css('height', '400px').css('margin-bottom', '40px');
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	google.maps.event.trigger(map, "resize");
 	
 	map.fitBounds(bounds);
@@ -98,26 +99,39 @@ function try_international_directions(origin, destination){
     var a_icon = 'http://maps.gstatic.com/mapfiles/marker_greenA.png';
     var b_icon = 'http://maps.gstatic.com/mapfiles/marker_greenB.png';
 
-    var originmarker = new google.maps.Marker({
+    originmarker = new google.maps.Marker({
       position: origin, 
       map: map,
       icon: a_icon,
       title:"You"
   	}); 
-
-  	
-  	var destinationmarker = new google.maps.Marker({
+  	  	
+  	destinationmarker = new google.maps.Marker({
       position: destination, 
       map: map, 
       icon: b_icon,
       title:"Previous Visitor"
-  	});  
+  	});
+
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'latLng': destination}, function(resultsGeoOrigin, statusGeoOrigin) {
+		if (statusGeoOrigin == google.maps.GeocoderStatus.OK) {
+			if (resultsGeoOrigin[0]) {
+				origin_address = resultsGeoOrigin[0].formatted_address;
+				$("#you").addClass('click').before("<h2> No driving directions between </h2>");
+				$("#lnglat").after("<h2> and </h2>");
+				$('#last').addClass('click');
+				$("#prev_lnglat").html("<h4> "+origin_address+" </h4>");
+			}
+		}
+	});
     
 }
-/** Converts numeric degrees to radians */
-function toRad(int){
-    return ((int * Math.PI) / 180);
-}
+$('.click').live('click', function(event){
+	which = $(this).attr('id') == 'you' ? origin : destination;
+	map.setCenter(which);
+	map.setZoom(15);
+});
 function show_direction_error(){
 	$('#content').show();
 	$('#content').html('<h1>Directions could not be found between you and '+pip+'. Try again later.</h1>');
