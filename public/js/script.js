@@ -56,27 +56,29 @@ function get_directions(lat, lng){
 			google.maps.event.trigger(map, "resize");
 			directionsDisplay.setDirections(response);
 		}else{
-			try_international_directions(lat, lng);
+			try_international_directions(origin, destination);
 		}
 	});
 }
 
 //disgusting, i know.
-function try_international_directions(lat, lng){
-	
-	var lat_midpoint = get_midpoint(lat, plat);
-	var lng_midpoint = get_midpoint(lng, plng);
+function try_international_directions(origin, destination){
 
-	console.log("latmidpoint:" +lat_midpoint);
+	bounds = new google.maps.LatLngBounds(origin, destination);
+
 
 	var myOptions = {
-		zoom:3,
+		zoom:8,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		center: new google.maps.LatLng(lat_midpoint, lng_midpoint)
-	}
+		center: bounds.getCenter()
+	};
 
+	$('#content').show();
+    $('#map').css('height', '400px').css('margin-bottom', '40px');
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
-		
+	
+	map.fitBounds(bounds);
+			
 	var flightPlanCoordinates = [
 		new google.maps.LatLng(lat, lng),
     	new google.maps.LatLng(plat, plng)
@@ -84,19 +86,30 @@ function try_international_directions(lat, lng){
   	
   	var flightPath = new google.maps.Polyline({
     	path: flightPlanCoordinates,
-    	strokeColor: "#FF0000",
+    	strokeColor: "#00FFFF",
     	strokeOpacity: 1.0,
-    	strokeWeight: 2
+    	strokeWeight: 3
     });
 
     flightPath.setMap(map);
 
-    $('#content').show();
-    $('#map').css('height', '400px').css('margin-bottom', '40px');
+    var originmarker = new google.maps.Marker({
+      position: origin, 
+      map: map, 
+      title:"You"
+  	}); 
+  	
+  	var destinationmarker = new google.maps.Marker({
+      position: destination, 
+      map: map, 
+      title:"Previous Visitor"
+  	});  
+
 	google.maps.event.trigger(map, "resize");
 }
-function get_midpoint(x, y){
-	return ((parseInt(x)+parseInt(y)) / 2);
+/** Converts numeric degrees to radians */
+function toRad(int){
+    return ((int * Math.PI) / 180);
 }
 function show_direction_error(){
 	$('#content').show();
