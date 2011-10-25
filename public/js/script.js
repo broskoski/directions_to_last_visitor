@@ -65,7 +65,7 @@ function get_directions(lat, lng){
 function try_international_directions(lat, lng){
 	
 	var myOptions = {
-		zoom:8,
+		zoom:3,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: new google.maps.LatLng(lat, lng)
 	}
