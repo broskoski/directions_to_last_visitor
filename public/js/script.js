@@ -86,7 +86,7 @@ function try_international_directions(origin, destination){
   	
   	var flightPath = new google.maps.Polyline({
     	path: flightPlanCoordinates,
-    	strokeColor: "#770077",
+    	strokeColor: "#3300ff",
     	strokeOpacity: 0.4,
     	strokeWeight: 5
     });
