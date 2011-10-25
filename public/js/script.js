@@ -67,7 +67,7 @@ function try_international_directions(lat, lng){
 	var myOptions = {
 		zoom:8,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-		center: onew google.maps.LatLng(37.772323, -122.214897)
+		center: new google.maps.LatLng(37.772323, -122.214897)
 	}
 
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
