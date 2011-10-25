@@ -1,7 +1,6 @@
 #content{:style => 'display:none'}
 	%h1#title Directions to Last Visitor
 	#map{:style=>"width:800px"}
-
 	-if @currentvisitor != nil
 		%h2#you="You (#{@currentvisitor.ip_address})"
 		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}°, #{@currentvisitor.longitude}°"	

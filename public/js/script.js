@@ -11,7 +11,6 @@ function geo_success(position){
 	geolng = position.coords.longitude;
 	
 	$("#lnglat").html(geolat + "°, " + geolng + "°");
-	
 	$.post("update/"+current_id, {lat: geolat, lng: geolng} );
 	
 	get_directions(geolat, geolng);
