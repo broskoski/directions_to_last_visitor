@@ -88,7 +88,7 @@ function try_international_directions(origin, destination){
     	path: flightPlanCoordinates,
     	strokeColor: "#770077",
     	strokeOpacity: 0.4,
-    	strokeWeight: 7
+    	strokeWeight: 5
     });
 
     flightPath.setMap(map);
@@ -130,8 +130,8 @@ function try_international_directions(origin, destination){
 				originairport = resultsGeoOrigin[5].formatted_address;
 
 				var requestOrigin = {
-					origin: origin, 
-					destination: 'airport near ' + originairport,
+					origin: destination, 
+					destination: 'Airport near ' + destination,
 					travelMode: google.maps.DirectionsTravelMode.DRIVING
 				};
 
@@ -146,13 +146,13 @@ function try_international_directions(origin, destination){
 									destinationairport = resultsGeoDestination[5].formatted_address;
 
 									var requestDestination = {
-										origin: 'airport near ' + destinationairport, 
+										origin: 'Airport near ' + destinationairport, 
 										destination: destination,
 										travelMode: google.maps.DirectionsTravelMode.DRIVING
 									};
 
-									directionsServiceOrigin.route(requestDestination, function(responseDestination, statusDestination) {
-										if (statusOrigin == google.maps.DirectionsStatus.OK) {
+									directionsServiceDestination.route(requestDestination, function(responseDestination, statusDestination) {
+										if (statusDestinaion == google.maps.DirectionsStatus.OK) {
 											directionsDisplayDestination.setDirections(responseDestination);
 										}
 									});
