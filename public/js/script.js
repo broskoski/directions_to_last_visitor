@@ -64,86 +64,44 @@ function get_directions(lat, lng){
 //disgusting, i know.
 function try_international_directions(origin, destination){
 	
-	//add map and directions elements
-	$("<div id='map2'></div>").insertAfter('#directions');
-	$("<div id='directions2'></div>").insertAfter('#map2');
-
-	var directionsServiceOrigin = new google.maps.DirectionsService();
-	var directionsDisplayOrigin = new google.maps.DirectionsRenderer();
-
-	var directionsServiceDestination = new google.maps.DirectionsService();
-	var directionsDisplayDestination = new google.maps.DirectionsRenderer();
-	
 	var myOptions = {
 		zoom:8,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}
 
-	var mapOrigin = new google.maps.Map(document.getElementById("map"), myOptions);
-	var mapDestination = new google.maps.Map(document.getElementById("map2"), myOptions);
+	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 		
-	directionsDisplayOrigin.setMap(mapOrigin);
 	directionsDisplayOrigin.setPanel(document.getElementById("directions"));
-
-	directionsDisplayDestination.setMap(mapDestination);
-	directionsDisplayDestination.setPanel(document.getElementById("directions2"));
 	
-	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'latLng': origin}, function(resultsGeoOrigin, statusGeoOrigin) {
-		if (statusGeoOrigin == google.maps.GeocoderStatus.OK) {
-			if (resultsGeoOrigin[4]) {
+	var flightPlanCoordinates = [
+		origin,
+    	destination
+    ];
+  	
+  	var flightPath = new google.maps.Polyline({
+    	path: flightPlanCoordinates,
+    	strokeColor: "#FF0000",
+    	strokeOpacity: 1.0,
+    	strokeWeight: 2
+    });
+	
+	var originmarker = new google.maps.Marker({
+		position: origin, 
+		map: map, 
+      	title:"You"
+    });
 
-				originairport = resultsGeoOrigin[4].formatted_address;
+    var destinationmarker = new google.maps.Marker({
+		position: destination, 
+		map: map, 
+      	title:"Previous Visitor"
+    });
 
-				var requestOrigin = {
-					origin: origin, 
-					destination: 'Airport near ' + originairport,
-					travelMode: google.maps.DirectionsTravelMode.DRIVING
-				};
-
-				directionsServiceOrigin.route(requestOrigin, function(responseOrigin, statusOrigin) {
-					
-					if (statusOrigin == google.maps.DirectionsStatus.OK) {
-						geocoder.geocode({'latLng': destination}, function(resultsGeoDestination, statusGeoDestination) {
-							
-							if (statusGeoDestination == google.maps.GeocoderStatus.OK) {
-								if (resultsGeoDestination[4]) {
-
-									destinationairport = resultsGeoDestination[4].formatted_address;
-
-									var requestDestination = {
-										origin: 'Airport near ' + destinationairport, 
-										destination: destination,
-										travelMode: google.maps.DirectionsTravelMode.DRIVING
-									};
-
-									directionsServiceOrigin.route(requestDestination, function(responseDestination, statusDestination) {
-										if (statusOrigin == google.maps.DirectionsStatus.OK) {
-											$('#map2').css('height', '400px').css('width', '100%').css('margin-bottom', '40px');
-											google.maps.event.trigger(mapDestination, "resize");
-											directionsDisplayDestination.setDirections(responseDestination);
-										}else{
-											show_direction_error()
-										}
-									});
-								}
-							}else{
-								show_direction_error();
-							}
-						});
-						$('#content').show();
-						$('#map').css('height', '400px').css('margin-bottom', '40px');
-						google.maps.event.trigger(mapOrigin, "resize");
-						directionsDisplayOrigin.setDirections(responseOrigin);
-					}else{
-						show_direction_error()
-					}
-				});
-				}
-		} else {
-			show_direction_error()
-		}
-	});
+    flightPath.setMap(map);
+    
+    $('#content').show();
+    $('#map').css('height', '400px').css('margin-bottom', '40px');
+	google.maps.event.trigger(map, "resize");
 }
 
 function show_direction_error(){
