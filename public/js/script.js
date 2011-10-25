@@ -67,24 +67,24 @@ function try_international_directions(lat, lng){
 	var myOptions = {
 		zoom:8,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		center: new google.maps.LatLng(37.772323, -122.214897)
+		center: new google.maps.LatLng(lat, lng)
 	}
 
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 		
-	// var flightPlanCoordinates = [
-	// 	new google.maps.LatLng(37.772323, -122.214897),
- //    	new google.maps.LatLng(21.291982, -157.821856)
- //    ];
+	var flightPlanCoordinates = [
+		new google.maps.LatLng(lat, lng),
+    	new google.maps.LatLng(plat, plng)
+    ];
   	
- //  	var flightPath = new google.maps.Polyline({
- //    	path: flightPlanCoordinates,
- //    	strokeColor: "#FF0000",
- //    	strokeOpacity: 1.0,
- //    	strokeWeight: 2
- //    });
+  	var flightPath = new google.maps.Polyline({
+    	path: flightPlanCoordinates,
+    	strokeColor: "#FF0000",
+    	strokeOpacity: 1.0,
+    	strokeWeight: 2
+    });
 
- //    flightPath.setMap(map);
+    flightPath.setMap(map);
 
     $('#content').show();
     $('#map').css('height', '400px').css('margin-bottom', '40px');
