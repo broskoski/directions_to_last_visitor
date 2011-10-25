@@ -82,6 +82,10 @@ function try_international_directions(origin, destination){
     	strokeOpacity: 1.0,
     	strokeWeight: 2
     });
+
+    $('#content').show();
+    $('#map').css('height', '400px').css('margin-bottom', '40px');
+	google.maps.event.trigger(map, "resize");
 	
 	var originmarker = new google.maps.Marker({
 		position: origin, 
@@ -96,10 +100,6 @@ function try_international_directions(origin, destination){
     });
 
     flightPath.setMap(map);
-    
-    $('#content').show();
-    $('#map').css('height', '400px').css('margin-bottom', '40px');
-	google.maps.event.trigger(map, "resize");
 }
 
 function show_direction_error(){
