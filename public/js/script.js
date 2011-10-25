@@ -63,18 +63,21 @@ function get_directions(lat, lng){
 
 //disgusting, i know.
 function try_international_directions(origin, destination){
+	var bounds = new google.maps.LatLngBounds();
 
-	bounds = new google.maps.LatLngBounds(origin, destination);
+	bounds.extend(origin);
+	bounds.extend(destination);
 
 	var myOptions = {
-		zoom:9,
+		zoom:1,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: bounds.getCenter()
 	};
 
 	$('#content').show();
-    $('#map').css('height', '400px').css('margin-bottom', '40px');
+    $('#map').css('height', '350px').css('margin-bottom', '40px');
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
+	google.maps.event.trigger(map, "resize");
 	
 	map.fitBounds(bounds);
 			
@@ -109,8 +112,7 @@ function try_international_directions(origin, destination){
       icon: b_icon,
       title:"Previous Visitor"
   	});  
-
-	google.maps.event.trigger(map, "resize");
+    
 }
 /** Converts numeric degrees to radians */
 function toRad(int){
