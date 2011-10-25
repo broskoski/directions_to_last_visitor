@@ -87,17 +87,17 @@ function try_international_directions(lat, lng){
     $('#map').css('height', '400px').css('margin-bottom', '40px');
 	google.maps.event.trigger(map, "resize");
 	
-	var originmarker = new google.maps.Marker({
-		position: origin, 
-		map: map, 
-      	title:"You"
-    });
+	// var originmarker = new google.maps.Marker({
+	// 	position: origin, 
+	// 	map: map, 
+ //      	title:"You"
+ //    });
 
-    var destinationmarker = new google.maps.Marker({
-		position: destination, 
-		map: map, 
-      	title:"Previous Visitor"
-    });
+ //    var destinationmarker = new google.maps.Marker({
+	// 	position: destination, 
+	// 	map: map, 
+ //      	title:"Previous Visitor"
+ //    });
 
     flightPath.setMap(map);
 }
