@@ -71,8 +71,6 @@ function try_international_directions(origin, destination){
 
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 		
-	directionsDisplayOrigin.setPanel(document.getElementById("directions"));
-	
 	var flightPlanCoordinates = [
 		origin,
     	destination
