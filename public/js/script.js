@@ -66,9 +66,8 @@ function try_international_directions(origin, destination){
 
 	bounds = new google.maps.LatLngBounds(origin, destination);
 
-
 	var myOptions = {
-		zoom:8,
+		zoom:9,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: bounds.getCenter()
 	};
@@ -102,6 +101,7 @@ function try_international_directions(origin, destination){
       icon: a_icon,
       title:"You"
   	}); 
+
   	
   	var destinationmarker = new google.maps.Marker({
       position: destination, 
