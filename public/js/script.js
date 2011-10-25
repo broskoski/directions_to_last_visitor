@@ -56,13 +56,13 @@ function get_directions(lat, lng){
 			google.maps.event.trigger(map, "resize");
 			directionsDisplay.setDirections(response);
 		}else{
-			try_international_directions(origin, destination);
+			try_international_directions(lat, lng);
 		}
 	});
 }
 
 //disgusting, i know.
-function try_international_directions(origin, destination){
+function try_international_directions(lat, lng){
 	
 	var myOptions = {
 		zoom:8,
@@ -72,8 +72,8 @@ function try_international_directions(origin, destination){
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
 		
 	var flightPlanCoordinates = [
-		origin,
-    	destination
+		new google.maps.LatLng(37.772323, -122.214897),
+    	new google.maps.LatLng(21.291982, -157.821856)
     ];
   	
   	var flightPath = new google.maps.Polyline({
