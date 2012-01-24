@@ -118,9 +118,9 @@ function try_international_directions(origin, destination){
 			if (resultsGeoOrigin[0]) {
 				origin_address = resultsGeoOrigin[0].formatted_address;
 				origin_city = resultsGeoOrigin[4].formatted_address;
-				$("#you").addClass('click').before("<h2> No directions between </h2>");
+				$("#you").addClass('click');
 				$('<img src="http://maps.gstatic.com/mapfiles/marker_greenA.png">').prependTo('#you');
-				$("#lnglat").after("<h2> and </h2>");
+				$("#lnglat").after("<h2> to </h2>");
 				$('#last').addClass('click');
 				$('<img src="http://maps.gstatic.com/mapfiles/marker_greenB.png">').prependTo('#last');
 				$("#prev_lnglat").html("<h4> "+origin_address+" </h4>");
