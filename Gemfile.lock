@@ -64,6 +64,7 @@ GEM
       launchy (~> 0.3.2)
       rest-client (>= 1.4.0, < 1.7.0)
     json (1.4.6)
+    json_pure (1.6.5)
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
@@ -105,7 +106,7 @@ DEPENDENCIES
   geokit
   haml
   heroku
-  json
+  json_pure
   rack-flash
   rack-test
   rspec
