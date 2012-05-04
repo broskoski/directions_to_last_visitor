@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'heroku'
-gem 'data_mapper' 
+gem 'datamapper' 
 gem 'haml'
 gem 'geokit'
 gem 'time-lord'
