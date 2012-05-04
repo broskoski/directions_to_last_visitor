@@ -105,6 +105,7 @@ DEPENDENCIES
   geokit
   haml
   heroku
+  json
   rack-flash
   rack-test
   rspec
