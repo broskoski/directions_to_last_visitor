@@ -2,11 +2,12 @@ source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'heroku'
-gem 'data_mapper'
+gem 'datamapper'
+gem 'rack-flash'
 gem 'haml'
 gem 'geokit'
 gem 'time-lord'
-gem 'json_pure'
+gem 'json'
 
 group :development do
   gem 'sqlite3-ruby'

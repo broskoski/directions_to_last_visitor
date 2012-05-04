@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'data_mapper'
+require 'datamapper'
 require 'geokit'
 require 'haml'
 require 'time-lord'
@@ -49,7 +49,7 @@ end
 
 get '/all' do
   content_type :json
-  JSON.generate(Visitor.all)
+  Visitor.all.to_json
 end
 
 
