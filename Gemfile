@@ -7,7 +7,7 @@ gem 'rack-flash'
 gem 'haml'
 gem 'geokit'
 gem 'time-lord'
-gem 'json_pure'
+gem 'activesupport', :require => 'active_support'
 
 group :development do
   gem 'sqlite3-ruby'

@@ -49,7 +49,7 @@ end
 
 get '/all' do
   content_type :json
-  JSON.generate(Visitor.all)
+  ActiveSupport::JSON.encode(object)
 end
 
 
