@@ -50,7 +50,7 @@ end
 
 get '/all' do
   content_type :json
-  ActiveSupport::JSON.encode(Visitor.all(:fields => [:id, :ip_address, :longitude, :latitude]))
+  Visitor.all(:fields => [:id, :ip_address, :longitude, :latitude]).to_json
 end
 
 
