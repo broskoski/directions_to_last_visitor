@@ -3,7 +3,8 @@ require 'datamapper'
 require 'geokit'
 require 'haml'
 require 'time-lord'
-require 'json/pure'
+require 'active_support'
+
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
