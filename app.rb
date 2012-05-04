@@ -1,11 +1,13 @@
 require 'sinatra'
-require 'datamapper' 
+require 'data_mapper' 
 require 'geokit'
 require 'haml'
 require 'time-lord'
 require 'json'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
+
+use Rack::Session::Pool, :expire_after => 2592000
 
 class Visitor 
   include DataMapper::Resource  
