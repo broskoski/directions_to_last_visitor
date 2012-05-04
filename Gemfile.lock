@@ -69,6 +69,8 @@ GEM
       rake (>= 0.8.1)
     mime-types (1.16)
     rack (1.2.2)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-flash (0.1.1)
       rack
     rack-test (0.5.7)
@@ -106,6 +108,7 @@ DEPENDENCIES
   geokit
   haml
   heroku
+  rack-contrib
   rack-flash
   rack-test
   rspec

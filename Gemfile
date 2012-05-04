@@ -8,6 +8,7 @@ gem 'haml'
 gem 'geokit'
 gem 'time-lord'
 gem 'activesupport', :require => 'active_support'
+gem 'rack-contrib'
 
 group :development do
   gem 'sqlite3-ruby'
