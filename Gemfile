@@ -7,6 +7,7 @@ gem 'rack-flash'
 gem 'haml'
 gem 'geokit'
 gem 'time-lord'
+gem 'json'
 
 group :development do
   gem 'sqlite3-ruby'

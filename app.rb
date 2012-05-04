@@ -3,6 +3,7 @@ require 'datamapper'
 require 'geokit'
 require 'haml'
 require 'time-lord'
+require 'json'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
@@ -45,6 +46,12 @@ get '/observe' do
   
   haml :observe
 end
+
+get '/all' do
+  content_type :json
+  Visitor.all.to_json
+end
+
 
 post '/update/:id' do
   current = Visitor.get(params[:id])
