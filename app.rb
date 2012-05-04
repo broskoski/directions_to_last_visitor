@@ -49,7 +49,7 @@ end
 
 get '/all' do
   content_type :json
-  Visitor.all.to_json
+  JSON.generate(Visitor.all)
 end
 
 
