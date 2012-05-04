@@ -50,7 +50,7 @@ end
 
 get '/all' do
   content_type :json
-  ActiveSupport::JSON.encode(object)
+  ActiveSupport::JSON.encode(Visitor.all)
 end
 
 
