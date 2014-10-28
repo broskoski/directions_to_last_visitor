@@ -31,11 +31,6 @@ get '/' do
     :latitude => @currentlocation.lat
   )
 
-  puts @currentvisitor.latitude
-  puts "ip #{ip}"
-  puts "@currentvisitor.ip_address: #{puts @currentvisitor.inspect}"
-  puts "@currentlocation.lng #{@currentlocation.inspect}"
-
   @previousvisitor = Visitor.last
   @previoustime = Time.parse(@previousvisitor.created_at.to_s).ago.to_words.capitalize
   @currentvisitor.save
@@ -53,12 +48,6 @@ get '/observe' do
 
   haml :observe
 end
-
-get '/all' do
-  content_type :json
-  Visitor.all(:fields => [:id, :ip_address, :longitude, :latitude]).to_json
-end
-
 
 post '/update/:id' do
   current = Visitor.get(params[:id])
