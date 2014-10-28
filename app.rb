@@ -7,7 +7,6 @@ require 'active_support'
 require 'rack/contrib/jsonp'
 
 use Rack::JSONP
-
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
 class Visitor
