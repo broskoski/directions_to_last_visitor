@@ -25,16 +25,23 @@ get '/' do
 
   ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
 
-  @currentlocation = Geokit::Geocoders::GeoPluginGeocoder.geocode(ip)
+  @currentlocation = Geokit::Geocoders::MultiGeocoder.geocode(ip)
   @currentvisitor = Visitor.new(
     :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'],
     :longitude => @currentlocation.lng,
     :latitude => @currentlocation.lat
   )
 
+  puts @currentvisitor.latitude
+  puts "ip #{ip}"
+  puts "@currentvisitor.ip_address: #{puts @currentvisitor.inspect}"
+  puts "@currentlocation.lng #{@currentlocation.inspect}"
+
   @previousvisitor = Visitor.last
   @previoustime = Time.parse(@previousvisitor.created_at.to_s).ago.to_words.capitalize
   @currentvisitor.save
+
+  puts @previoustime
 
   haml :index
 end
