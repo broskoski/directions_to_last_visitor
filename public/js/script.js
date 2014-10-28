@@ -81,10 +81,7 @@ function try_international_directions(origin, destination){
 	
 	map.fitBounds(bounds);
 			
-	var flightPlanCoordinates = [
-		new google.maps.LatLng(lat, lng),
-    	new google.maps.LatLng(plat, plng)
-    ];
+	var flightPlanCoordinates = [new google.maps.LatLng(lat, lng), new google.maps.LatLng(plat, plng)];
   	
   	var flightPath = new google.maps.Polyline({
     	path: flightPlanCoordinates,
