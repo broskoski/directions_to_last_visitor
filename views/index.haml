@@ -1,31 +1,31 @@
 #content{:style => 'display:none'}
-	%h1#title Directions to Last Visitor
-	#map{:style=>"width:800px"}
-	-if @currentvisitor != nil
-		%h2#you="You (#{@currentvisitor.ip_address})"
-		%h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}°, #{@currentvisitor.longitude}°"	
-		/ %h4{:style=> "text-align:center"}="Just now"
-		#directions{:style=>"width:100%"}
-	-if @previousvisitor != nil
-		%h2#last="Previous visitor (#{@previousvisitor.ip_address})"
-		%h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}°, #{@previousvisitor.longitude}°"
-		/ %h4{:style=> "text-align:center"}=@previoustime
-		%span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
-		%span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
-	-else
-		%h2 Error retrieving previous visitor (defaulting to Cancun)
-		%span#prev_lng{:style => "display:none"}="Cancun,Mexico"
-		%span#prev_lat{:style => "display:none"}=""
+  %h1#title Directions to Last Visitor
+  #map{:style=>"width:800px"}
+  -if @currentvisitor != nil
+    %h2#you="You (#{@currentvisitor.ip_address})"
+    %h4#lnglat{:style=> "text-align:center"}= "#{@currentvisitor.latitude}°, #{@currentvisitor.longitude}°" 
+    / %h4{:style=> "text-align:center"}="Just now"
+    #directions{:style=>"width:100%"}
+  -if @previousvisitor != nil
+    %h2#last="Previous visitor (#{@previousvisitor.ip_address})"
+    %h4#prev_lnglat{:style=> "text-align:center"}= "#{@previousvisitor.latitude}°, #{@previousvisitor.longitude}°"
+    / %h4{:style=> "text-align:center"}=@previoustime
+    %span#prev_lng{:style => "display:none"}="#{@previousvisitor.longitude}"
+    %span#prev_lat{:style => "display:none"}="#{@previousvisitor.latitude}"
+  -else
+    %h2 Error retrieving previous visitor (defaulting to Cancun)
+    %span#prev_lng{:style => "display:none"}="Cancun,Mexico"
+    %span#prev_lat{:style => "display:none"}=""
 
 :javascript
-	var lat = #{@currentvisitor.latitude};
-	var lng = #{@currentvisitor.longitude};
+  var lat = #{@currentvisitor.latitude};
+  var lng = #{@currentvisitor.longitude};
 
-	var plat = #{@previousvisitor.latitude};
-	var plng = #{@previousvisitor.longitude};
+  var plat = #{@previousvisitor.latitude};
+  var plng = #{@previousvisitor.longitude};
 
-	var pip = "#{@previousvisitor.ip_address}";
-	var current_id = #{@currentvisitor.id};
+  var pip = "#{@previousvisitor.ip_address}";
+  var current_id = #{@currentvisitor.id};
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -35,7 +35,7 @@
   ga('create', 'UA-56177172-1', 'auto');
   ga('send', 'pageview');
 
-	$(document).ready(function() {
-		get_location();
-	});
+  $(document).ready(function() {
+    get_location();
+  });
 
