@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'datamapper'
+require 'data_mapper'
 require 'geokit'
 require 'haml'
 require 'time-lord'
