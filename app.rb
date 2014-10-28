@@ -22,11 +22,11 @@ end
 
 get '/' do
 
-  ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
+  ip = request.ip
 
   @currentlocation = Geokit::Geocoders::MultiGeocoder.geocode(ip)
   @currentvisitor = Visitor.new(
-    :ip_address => env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR'],
+    :ip_address => request.ip,
     :longitude => @currentlocation.lng,
     :latitude => @currentlocation.lat
   )
