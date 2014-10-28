@@ -5,13 +5,13 @@ require 'haml'
 require 'time-lord'
 require 'active_support'
 require 'rack/contrib/jsonp'
- 
+
 use Rack::JSONP
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
-class Visitor 
-  include DataMapper::Resource  
+class Visitor
+  include DataMapper::Resource
 
   property :id,           Serial
   property :ip_address,   String
@@ -33,11 +33,11 @@ get '/' do
     :longitude => @currentlocation.lng,
     :latitude => @currentlocation.lat
   )
-  
+
   @previousvisitor = Visitor.last
   @previoustime = Time.parse(@previousvisitor.created_at.to_s).ago_in_words.capitalize
   @currentvisitor.save
-  
+
   haml :index
 end
 
@@ -46,7 +46,7 @@ get '/observe' do
   @currentvisitor = Visitor.last
   @previousvisitor = Visitor[-2]
   @previoustime = Time.parse(@previousvisitor.created_at.to_s).ago_in_words.capitalize
-  
+
   haml :observe
 end
 
@@ -60,7 +60,7 @@ post '/update/:id' do
   current = Visitor.get(params[:id])
   current.longitude = params[:lng]
   current.latitude = params[:lat]
-  
+
   if current.save
     status 201
   else
